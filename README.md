@@ -2,10 +2,11 @@
 ## Application Web De publication  des articles.
 ### Description 
 
-Application Web pasé sur [Angular](https://angular.dev/) Frontend  et [Laravel](https://laravel.com/docs/5.8/installation) Backend.
+Application Web basée sur [Angular](https://angular.dev/) Frontend  et [Laravel](https://laravel.com/docs/5.8/installation) Backend.
+#
 Notre application se concentre sur le domaine de l'informatique et permet aux utilisateurs de lire et de publier des articles sur ce sujet. Les utilisateurs peuvent découvrir les dernières tendances et les dernières nouvelles sur l'informatique, ainsi que partager leur propre connaissance et expérience dans ce domaine. La plateforme offre une communauté en ligne pour les passionnés d'informatique pour apprendre et se connecter les uns avec les autres.
 
-### Requirements
+### Environnement
 * [Angular](https://angular.dev/)
 * [laravel 5.8](https://laravel.com/docs/5.8/installation)
 * [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
@@ -23,6 +24,8 @@ Notre application se concentre sur le domaine de l'informatique et permet aux ut
 6. Démarrer le serveur: Démarrez le serveur en utilisant la commande php artisan serve pour le backend et ng serve pour le frontend.
 7. Accéder à l'application: Accédez à l'application en utilisant un navigateur et en saisissant l'URL http://localhost:4200 pour le frontend et http://localhost:8000 pour le backend.
 
+
+## Voici des exemples d'interface pour cette application.
 
 
 
