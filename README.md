@@ -17,13 +17,11 @@ Notre application se concentre sur le domaine de l'informatique et permet aux ut
 ## Les étapes pour exécuter l'application  
 
 1. Cloner le dépôt GitHub: Clonez le dépôt GitHub qui contient les codes sources pour l'application frontend et backend.
-2. Installer les dépendances: Utilisez la commande npm install pour installer les dépendances nécessaires pour le frontend et composer install pour les dépendances backend.
-3. Installer les dépendances: Utilisez la commande npm install pour installer les dépendances nécessaires pour le frontend et composer install pour les dépendances backend.
-4. Configurer la base de données: Configurez la base de données en modifiant le fichier de configuration .env avec vos informations de connexion à la base de données.
-5. Exécuter les migrations: Exécutez la commande php artisan migrate pour créer les tables nécessaires pour votre application.
-6. Démarrer le serveur: Démarrez le serveur en utilisant la commande php artisan serve pour le backend et ng serve pour le frontend.
-7. Accéder à l'application: Accédez à l'application en utilisant un navigateur et en saisissant l'URL http://localhost:4200 pour le frontend et http://localhost:8000 pour le backend.
-
+2. Installer les dépendances: Utilisez la commande `npm install` pour installer les dépendances nécessaires pour le frontend et `composer install` pour les dépendances backend.
+3. Configurer la base de données: Configurez la base de données en modifiant le fichier de configuration `.env` avec vos informations de connexion à la base de données.
+4. Exécuter les migrations: Exécutez la commande `php artisan migrate` pour créer les tables nécessaires pour votre application.
+5. Démarrer le serveur: Démarrez le serveur en utilisant la commande `php artisan serve` pour le backend et `ng serve` pour le frontend.
+6. Accéder à l'application: Accédez à l'application en utilisant un navigateur et en saisissant l'URL http://localhost:4200 pour le frontend et http://localhost:8000 pour le backend.
 
 ## Voici des exemples d'interface pour cette application.
 
