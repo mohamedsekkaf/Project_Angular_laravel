@@ -25,6 +25,18 @@ Notre application se concentre sur le domaine de l'informatique et permet aux ut
 
 ## Voici des exemples d'interface pour cette application.
 
+### interface home
+
+![Capture d’écran 2023-02-01 à 23 54 28](https://user-images.githubusercontent.com/49958258/216192536-7bc5c57e-a0a2-4b9a-a42b-2d122e3e8aba.png)
+
+### interface pour les Videos
+
+![Capture d’écran 2023-02-02 à 00 03 53](https://user-images.githubusercontent.com/49958258/216193244-2af07521-8f55-47e2-b696-5fbc1c2516b7.png)
+
+### interface profile 
+
+![Capture d’écran 2023-02-02 à 00 04 32](https://user-images.githubusercontent.com/49958258/216193366-83f4324d-06cc-4ffe-93b5-4b5585d690bd.png)
+
 
 
 
