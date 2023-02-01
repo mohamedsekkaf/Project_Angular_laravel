@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title">Login</h4>
+
+            <form (ngSubmit)="submit()" [formGroup]="form">
+
+                <div class="form-group">
+                    <label for="email">Email <strong style="color: red;">*</strong></label>
+                    <input type="text" formControlName="email" name="email" class="form-control" 
+                    placeholder="Enter Email" [ngClass]="{'is-invalid': submitted && f.email.errors}">
+
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">
+                            Email is Requered
+                        </div>
+                        <div *ngIf="f.email.errors.email">
+                            Email must be a valid email address
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <div class="form-group">
+                    <label for="password">Password <strong style="color: red;">*</strong></label>
+                    <input type="password" formControlName="password" name="password" class="form-control" 
+                    placeholder="Enter Password" [ngClass]="{'is-invalid': submitted && f.password.errors}">
+
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">
+                            Password is Requered
+                        </div>
+                        <div *ngIf="f.password.errors.minlength">
+                            Password must be atleast 6 character
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary mt-4" type="submit">Login</button>
+            </form>
+            <div style="display: flex; text-align: center;width: 100%;" >
+                <p style="width: 100%;" >Don't have any account? <strong routerLink="/register" style="color:rgb(67, 229, 250);" class="register"> Register</strong></p>
+            </div>
+        </div>
+    </div>
+</div>

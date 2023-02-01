@@ -1,0 +1,17 @@
+body{
+display: grid;
+  grid-template-columns: 200px auto 200px;
+}
+
+#left-sidebar {
+  grid-column: 1;
+}
+
+#main-content {
+  grid-column: 2;
+  color: aqua;
+}
+
+#right-sidebar {
+  grid-column: 3;
+}

@@ -1,0 +1,63 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-3  sidebar">
+      <app-sidbar></app-sidbar>
+    </div>
+    <div class="col-6 home-content" style="position: sticky;">
+      <p>trash works!</p>
+      <ng-container *ngFor="let item of allpost">
+        <div class="post-container">
+          <div class="post">
+            <!-- post user info -->
+            <div class="user-info">
+              <a routerLink="/profile/{{item.user_name}}"><img src="../../../assets/image_users/{{item.img_user}}"
+                  alt="User Avatar"></a>
+              <div class="user-name"><a style="text-decoration: none; color: rgb(20, 20, 20);"
+                  routerLink="/profile/{{item.user_name}}">{{ item.user_name }}</a></div>
+              <div class="created-at">{{item.time}}</div>
+              <div class="setting ">
+                <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><img src="../../../assets/icon/setting.svg"></a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" routerLink="/profile/{{item.user_name}}">Profile</a>
+                    <a class="dropdown-item" (click)="restore(item.slug)">Restore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End post user info -->
+            <div class="post-content">
+              <div>
+                <h3> {{item.title}} </h3>
+              </div>
+              <div [innerHTML]="item.desc" [id]="'description-' + item.id"></div>
+              <div>
+                <img style="width: 100%;" src="../../../assets/image_post/{{item.image_post}}" alt=""
+                  *ngIf="item.type == 'Image'">
+                <iframe style=" width:100%; height:336px;" [src]="videoUrl(item.image_post)" frameborder="0"
+                  allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen *ngIf="item.type == 'Video'">
+                </iframe>
+              </div>
+            </div>
+            <div class="post-footer">
+              <div class="post-footer-item">
+                <i class="bi bi-chat-left-text" style="cursor: pointer; font-size: 1.5rem;"></i>
+              </div>
+              <div class="post-footer-item">
+                <span class="post-category">Category: News</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+    <div class="col-3  sidbarright">
+      <app-sidbar-left></app-sidbar-left>
+    </div>
+  </div>
+</div>

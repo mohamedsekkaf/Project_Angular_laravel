@@ -1,0 +1,53 @@
+<div id="sidbar-mobile">
+    <button  routerLink="/" class="button1" *ngIf="isLoggedIn" >
+      <i class="bi bi-house icon"></i>
+      Home
+    </button>
+    <button routerLink="/image" class="button2" *ngIf="isLoggedIn" >
+      <i class="bi bi-image icon"></i>
+      Image
+    </button>
+    <button routerLink="/video" class="button2" *ngIf="isLoggedIn" >
+      <i class="bi bi-youtube icon"></i>
+      Video
+    </button>
+    <button routerLink="/profile/{{this.authuser}}" class="button2" *ngIf="isLoggedIn" >
+      <i class="bi bi-person-fill icon"></i>
+      Profile
+    </button>
+   
+    <button  routerLink="/app-top-post" class="button2" id="to-follow" *ngIf="isLoggedIn" >
+      <i class="bi bi-stars icon"></i>
+      Top 
+    </button>
+    <button routerLink="/trash" class="button2" *ngIf="isLoggedIn" >
+      <i class="bi bi-recycle icon"></i>
+      Trash
+    </button>
+    <button routerLink="/login" class="button2" *ngIf="!isLoggedIn" >
+      <i class="bi bi-box-arrow-in-right icon"></i>
+      Login
+    </button>
+    <button routerLink="/register" class="button2"  *ngIf="!isLoggedIn" >
+      <i class="bi bi-person-add icon"></i>
+      Register
+    </button>
+  </div>
+  <br><br>
+  <div>
+    <button data-toggle="modal" data-target="#myModal" class="button1" *ngIf="isLoggedIn" >
+      <i class="bi bi-plus-circle-fill icon"></i>
+      ADD
+    </button>
+    <button (click)="logout()" class="button2" *ngIf="isLoggedIn" >
+      <i class="bi bi-box-arrow-right icon"></i>
+      Logout
+    </button>
+    
+  </div>
+
+
+
+
+
+

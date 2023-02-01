@@ -1,0 +1,164 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-3  sidebar">
+            <app-sidbar></app-sidbar>
+        </div>
+        <div class="col-6 home-content animate__animated animate__bounceIn" style="position: sticky;">
+            <ng-container *ngFor="let item of data">
+                <div class="post-container">
+                    <div class="post">
+                        <!-- post user info -->
+                        <div class="user-info">
+                            <img  routerLink="/profile/{{item.user_name}}" src="../../../assets/image_users/{{item.img_user}}" alt="User Avatar">
+                            <div class="user-name">{{ item.user_name }}</div>
+                            <div class="created-at">{{item.time}}</div>
+                            <div class="setting ">
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><img
+                                            src="../../../assets/icon/setting.svg"></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                        <a class="dropdown-item" *ngIf="this.user_name == item.user_name"
+                                            (click)="openModal()">Edit</a>
+                                        <a class="dropdown-item" *ngIf="this.user_name == item.user_name"
+                                            (click)="delete(item.slug)">Delete</a>
+                                        <a class="dropdown-item" routerLink="/profile/{{item.user_name}}">Profile</a>
+                                        <a class="dropdown-item">Copy Link</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End post user info -->
+                        <div class="post-content">
+                            <div>
+                                <h3> {{item.title}} </h3>
+                            </div>
+                            <div [innerHTML]="item.desc" class="description" [id]="'description-' + item.id"></div>
+                            <strong (click)="showMore(item.id)" class="read-more" [id]="'read-more-' + item.id"
+                                style="cursor: pointer;">Read more</strong>
+                            <strong (click)="showLess(item.id)" class="read-less" [id]="'read-less-' + item.id"
+                                style="cursor: pointer;">Hidden</strong>
+                            <div>
+                                <img style="width: 100%;" src="../../../assets/image_post/{{item.image_post}}" alt=""
+                                    *ngIf="item.type == 'Image'">
+                                <iframe style=" width:100%; height:336px;" [src]="videoUrl(item.image_post)"
+                                    frameborder="0"
+                                    allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen *ngIf="item.type == 'Video'"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="post-footer">
+                            <div class="post-footer-item animate__animated animate__zoomInDown" *ngIf="islikes">
+                            <i class="bi bi-heart-fill btnlike" (click)="unlike(item.slug)"  style="cursor: pointer;"></i>
+                            <span class="like-count">{{this.countlike}} Like</span>
+                            </div> 
+                            <div class="post-footer-item" *ngIf="!islikes">
+                                <i class="bi bi-heart btnlike" (click)="like(item.slug)" style="cursor: pointer;"></i>
+                                <span class="like-count">{{this.countlike}} Like</span>
+                            </div>
+                            
+                            
+                            <div class="post-footer-item">
+                                <i class="bi bi-chat-left-text" routerLink="/postdetails/{{item.slug}}"
+                                    style="cursor: pointer; font-size: 1.5rem;"></i>
+                                <span class="comment-count">{{this.countcomment}} Comment</span>
+                            </div>
+                            <div class="post-footer-item">
+                                <span class="post-category">Category: News</span>
+                            </div>
+
+                        </div>
+                        <form (ngSubmit)="submit()" [formGroup]="form">
+                            <div>
+                                <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'"
+                                    formControlName="comment" name="comment"
+                                    [ngClass]="{'is-invalid': submitted && f.comment.errors}"></angular-editor>
+                                <div *ngIf="submitted && f.comment.errors" style="text-align: center;color: red;">
+                                    <div *ngIf="f.comment.errors.required">
+                                        Comment is Required
+                                    </div>
+                                </div>
+                                <input class="btn" type="submit" value="Comment">
+                            </div>
+                        </form>
+                        <div class="comments">
+                            <h3>Comments</h3>
+                            <ul>
+                                <li *ngFor="let item1 of commentpost ">
+                                    <div class="comment-header"> 
+                                        <img src="../../../assets/image_users/{{item1.user_image}}" alt="Avatar">
+                                        <span>{{item1.user}}</span>&nbsp;
+                                        <span>{{item1.time}}</span>
+                                    </div>
+                                    <div style="width: 100%;text-align: center;" [innerHTML]="item1.comment">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+        <div class="col-3  sidbarright">
+            <app-sidbar-left></app-sidbar-left>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal-backdrop"></div>
+
+<!-- data  modal edit desc  -->
+<div class="modal fade show" id="editdesc" role="dialog" aria-hidden="true">
+    <form (ngSubmit)="submitdesc()" [formGroup]="formdesc">
+        <ng-container *ngFor="let item of data">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" (click)="CloseModal()" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Description</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Edit Title</label>
+                            <input type="text" formControlName="title" name="title" class="form-control"
+                                placeholder="Enter Title" value="{{item.title}}"
+                                [ngClass]="{'is-invalid': submitteddesc && ff.title.errors}">
+
+                            <div *ngIf="submitteddesc && ff.title.errors" style="text-align: center;color: red;">
+                                <div *ngIf="ff.title.errors.required">
+                                    Title is Requered
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <div class="form-group">
+                            <label for="desc">Edit Description</label>
+                            <angular-editor [config]="editorConfig" formControlName="desc"
+                                [placeholder]="'Enter text here...'" name="desc"
+                                [ngClass]="{'is-invalid': submitteddesc && ff.desc.errors}" [(ngModel)]="item.desc">
+                            </angular-editor>
+                            <div *ngIf="submitteddesc && ff.desc.errors" style="text-align: center;color: red;">
+                                <div *ngIf="ff.desc.errors.required">
+                                    Description is Required
+                                </div>
+                            </div>
+
+                            <button class="btn warning" type="submit">Update</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" (click)="CloseModal()"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </form>
+</div>
+<!-- end data modal -->

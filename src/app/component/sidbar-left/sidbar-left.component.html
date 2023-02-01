@@ -1,0 +1,31 @@
+<div id="who-to-follow" style="max-height: 300px; overflow-y: scroll;">
+  <h3 class="h3">Who to Follow <i (click)="refrech()" class="bi bi-arrow-clockwise"></i></h3> 
+  <hr>
+  <ul *ngFor="let item of topusers">
+    <li>
+      <img src="../../../assets/image_users/{{item.icon_user}}" alt="User 1">
+      <p> {{item.name}} </p>
+      <button  class="follow" [id]="'follow-'+item.name" (click)="follow(item.name)">Follow</button>
+      <button class="following" [id]="'following-'+item.name" >Following</button>
+    </li>
+    <hr>
+  </ul>
+</div>
+<br><br>
+<!-- post  Recommended -->
+<div id="recommended-posts" style="max-height: 300px; overflow-y: scroll;">
+  <h3>Recommended Posts</h3>
+  <hr>
+  <ul *ngFor="let post of topposts" routerLink="/postdetails/{{post.slug}}">
+    <li>
+      <img src="../../../assets/image_users/{{post.img_user}}" >
+      <h4> {{post.title}} </h4><br>
+    </li>
+    <li>
+      <p> {{post.time}} </p>
+    </li>
+    <hr>
+  </ul>
+</div>
+
+

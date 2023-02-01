@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title">Add Post</h4>
+
+            <form (ngSubmit)="submit()" [formGroup]="form">
+
+                <div class="form-group">
+                    <label for="name">Post Title</label>
+                    <input type="text" formControlName="title" name="title" class="form-control"
+                        placeholder="Enter Title" [ngClass]="{'is-invalid': submitted && f.title.errors}">
+
+                    <div *ngIf="submitted && f.title.errors" style="text-align: center;color: red;">
+                        <div *ngIf="f.title.errors.required">
+                            Title is Requered
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" formControlName="category" id="category" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && f.category.errors}">
+                        <option value="">Select Category</option>
+                        <option value="cat 1">cat 1</option>
+                        <option value="cat 2">cat 2</option>
+                    </select>
+
+                    <div *ngIf="submitted && f.category.errors" style="text-align: center;color: red;">
+                        <div *ngIf="f.category.errors.required">
+                            Category is Requered
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <div class="form-group">
+                    <label for="type">Type Post</label>
+                    <select name="type"  id="type" class="form-control"
+                        
+                        (change)="type($event)">
+                        <option value="Image">Image</option>
+                        <option value="Video">Video</option>
+                    </select>
+                </div><br>
+
+                <div class="form-group image">
+                    <label for="file">Select Image</label>
+                    <input type="file" formControlName="file" name="file" id="file" class="form-control"
+                        placeholder="Enter Password" accept=".png, .jpg, .jpeg" (change)="uploadimage($event)" [ngClass]="{'is-invalid': submitted && f.file.errors}">
+
+                    <div *ngIf="submitted && f.file.errors" style="text-align: center;color: red;">
+                        <div *ngIf="f.file.errors.required">
+                            Image is Requered
+                        </div>
+                        <div *ngIf="f.file.errors.size">
+                            2.5M or >
+                        </div>
+                    </div>
+
+                </div><br>
+                <div class="form-group video" >
+                    <label for="file">Enter Video ID</label>
+                    <input type="text" formControlName="file" name="file" id="file" class="form-control"
+                        placeholder="Enter Password" accept=".png, .jpg, .jpeg" (change)="uploadimage($event)" [ngClass]="{'is-invalid': submitted && f.file.errors}">
+
+                    <div *ngIf="submitted && f.file.errors" style="text-align: center;color: red;">
+                        <div *ngIf="f.file.errors.required">
+                            Youtube Video  is Requered
+                        </div>
+                        <div *ngIf="f.file.errors.size">
+                            2.5M or >
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <div class="form-group">
+                    <label for="desc">Description</label>
+                        <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'"formControlName="desc"name="desc" [ngClass]="{'is-invalid': submitted && f.desc.errors}" ></angular-editor>
+                    <div *ngIf="submitted && f.desc.errors" style="text-align: center;color: red;">
+                        <div *ngIf="f.desc.errors.required">
+                            Description is Required
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <button class="btn btn-primary mt-4" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+

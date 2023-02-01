@@ -1,0 +1,8 @@
+.register:hover{
+    color: #1876f2;
+    cursor: pointer;
+}
+.container{
+    top: 140px;
+    position: relative;
+}

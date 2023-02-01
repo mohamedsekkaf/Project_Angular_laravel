@@ -1,0 +1,220 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-3  sidebar">
+      <app-sidbar></app-sidbar>
+    </div>
+    <div class="col-6 home-content" style="position: sticky;">
+      <div class="text-center card-box" style="top: 46px; position: relative;">
+        <div class="member-card">
+          <ng-container *ngFor="let item2 of userinfo">
+            <div style="text-align: center;" class="mx-auto">
+              <img style="width: 20%;text-align: center;float: center;"
+                src="../../../assets/image_users/{{item2.icon_user}}" class="rounded-circle img-thumbnail"
+                alt="profile-image">
+              <i class="bi bi-pencil-square" style="top: 30px;position: relative; cursor: pointer;"
+                (click)="openModal2()" *ngIf="authuser == item2.name">
+              </i>
+
+            </div>
+            <div class="">
+
+              <h4> {{item2.full_name}} </h4>
+
+              <p *ngIf="authuser == item2.name" class="text-muted"><a type="submit"
+                  style="text-decoration: none; color: rgb(34, 171, 235);" (click)="openModal1()">Edit</a>
+              </p>
+            </div>
+            <input *ngIf="!isfollower" (click)="follow()" type="submit" value="Follow" type="button" class="btn ">
+            <input *ngIf="isfollower" (click)="unfollow()" type="submit" value="UnFollow" type="button"
+              class="btn btnunfolow">
+          </ng-container>
+          <div class="mt-4">
+            <div class="row">
+              <div class="col-4">
+                <div class="mt-3">
+                  <h4>{{ count }}</h4>
+                  <p class="mb-0 text-muted">Followers</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="mt-3">
+                  <h4>{{countfollowing}}</h4>
+                  <p class="mb-0 text-muted">Following</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="mt-3">
+                  <h4>{{post}}</h4>
+                  <p class="mb-0 text-muted">Post </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br><br>
+      <ng-container *ngFor="let item of allpost">
+        <div class="post-container animate__animated animate__bounceIn">
+          <div class="post">
+            <!-- post user info -->
+            <div class="user-info">
+              <a routerLink="/profile/{{item.user_name}}"><img src="../../../assets/image_users/{{item.img_user}}"
+                  alt="User Avatar"></a>
+              <div class="user-name"><a style="text-decoration: none; color: rgb(20, 20, 20);"
+                  routerLink="/profile/{{item.user_name}}">{{ item.user_name }}</a></div>
+              <div class="created-at">{{item.time}}</div>
+              <div class="setting ">
+                <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><img src="../../../assets/icon/setting.svg"></a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" routerLink="/profile/{{item.user_name}}">Profile</a>
+                    <a class="dropdown-item" routerLink="/postdetails/{{item.slug}}">Show Details</a>
+                    <a class="dropdown-item">Copy Link</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End post user info -->
+            <div class="post-content">
+              <div>
+                <h3> {{item.title}} </h3>
+              </div>
+              <div [innerHTML]="item.desc" class="description" [id]="'description-' + item.id"></div>
+              <strong (click)="showMore(item.id)" class="read-more" [id]="'read-more-' + item.id"
+                style="cursor: pointer;">Read more</strong>
+              <strong style="cursor: pointer;" (click)="showLess(item.id)" class="read-less"
+                [id]="'read-less-' + item.id">Hidden</strong>
+              <div>
+                <img style="width: 100%;" src="../../../assets/image_post/{{item.image_post}}" alt=""
+                  *ngIf="item.type == 'Image'">
+                <iframe style=" width:100%; height:336px;" [src]="videoUrl(item.image_post)" frameborder="0"
+                  allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen *ngIf="item.type == 'Video'">
+                </iframe>
+              </div>
+            </div>
+            <div class="post-footer">
+              <!-- <div class="post-footer-item" *ngIf="like.user_like != userauth">
+                  <i class="bi bi-heart" (click)="like(item.slug)" style="cursor: pointer;"></i>
+                  <span class="like-count">10</span>
+                </div>
+              
+              <div class="post-footer-item" *ngIf="">
+                <i class="bi bi-heart-fill" (click)="unlike(item.slug)"  style="cursor: pointer;"></i>
+                <span class="like-count">10</span>
+              </div> -->
+              <div class="post-footer-item">
+                <i class="bi bi-chat-left-text" routerLink="/postdetails/{{item.slug}}"
+                  style="cursor: pointer; font-size: 1.5rem;"></i>
+                <!-- <span class="comment-count">{{ getcomment(item.slug) }}</span> -->
+              </div>
+              <div class="post-footer-item">
+                <span class="post-category">Category: News</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+    <div class="col-3  sidbarright">
+      <app-sidbar-left></app-sidbar-left>
+    </div>
+  </div>
+</div>
+
+
+<div class="modalbackdrop"></div>
+
+
+<!-- modal update user Profile -->
+<div class="modal fade show" id="updateimguser" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn btn-danger" (click)="CloseModal2()" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Profile Image</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="file">Select Image</label>
+          <input type="file" name="file" id="file" class="form-control" placeholder="Enter Password"
+            accept=".png, .jpg, .jpeg" (change)="uploadimage($event)">
+        </div><br>
+
+
+        <button class="btn" (click)="upiconuser()" type="submit">Update</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="CloseModal2()" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end update user icon -->
+
+
+
+
+<!-- start update user info -->
+<div class="modal fade show" id="updateuser" role="dialog">
+  <ng-container *ngFor="let item of userinfo">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="CloseModal1()" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Profile Info</h4>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="submit()" [formGroup]="form">
+            <div class="form-group">
+              <label for="full_name"> Update Full name</label>
+              <input type="text" formControlName="full_name" name="full_name" class="form-control" placeholder="New Full Name "
+                [ngClass]="{'animate__animated animate__shakeX is-invalid': submitted && f.full_name.errors}" [(ngModel)]="item.full_name">
+              <div *ngIf="submitted && f.full_name.errors" style="text-align: center;color: red;">
+                <div *ngIf="f.full_name.errors.required">
+                  Full Name is Requered
+                </div>
+              </div>
+            </div><br>
+            <!-- <div class="form-group">
+              <label for="name">Update User Name</label>
+              <input type="text" formControlName="name" name="name" class="form-control" placeholder="New User Name  "
+                [ngClass]="{'animate__animated animate__shakeX is-invalid': submitted && f.name.errors}" [(ngModel)]="item.name">
+              <div *ngIf="submitted && f.name.errors" style="text-align: center;color: red;">
+                <div *ngIf="f.name.errors.required">
+                  User Name Requered
+                </div>
+              </div>
+            </div><br> -->
+            <!-- <div class="form-group">
+              <label for="email">Update Email</label>
+              <input type="text" formControlName="email" name="email" class="form-control" placeholder="Enter "
+                [ngClass]="{'animate__animated animate__shakeX is-invalid': submitted && f.email.errors}" [(ngModel)]="item.email">
+              <div *ngIf="submitted && f.email.errors" style="text-align: center;color: red;">
+                <div *ngIf="f.email.errors.required"> 
+                  Email Requered
+                </div>
+                <div *ngIf="f.email.errors.email">
+                  Email Format Invalid
+                </div>
+              </div>
+            </div><br> -->
+            
+            <button class="btn" type="submit">Update</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="CloseModal1()" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

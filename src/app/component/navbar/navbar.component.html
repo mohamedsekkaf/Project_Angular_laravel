@@ -1,0 +1,153 @@
+<nav class="navbar navbar-expand-lg ">
+    <a class="btn-home navbar-brand " routerLink="/" href="#" routerLinkActive=active
+        [routerLinkActiveOptions]="{exact:true}">Home
+    </a>
+    <a class="btn-menu-mobile" id="btnshow" (click)="showmenu()">
+        <i class="bi bi-list"></i>
+    </a>
+    <a class="btn-menu-mobile" id="btnhid" (click)="hidmenu()">
+        <i class="bi bi-x-square"></i>
+    </a>
+
+
+        <ul class="navbar-nav ms-auto mr-4">
+            <li class="nav-item active mr-12 ml-3" *ngIf="isLoggedIn">
+                <a class="nav-item">
+                    <button class="icon-circle" data-toggle="modal" data-target="#myModal">Add</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/login" *ngIf="!isLoggedIn" routerLinkActive=active
+                    [routerLinkActiveOptions]="{exact:true}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/register" href="#" *ngIf="!isLoggedIn" routerLinkActive=active
+                    [routerLinkActiveOptions]="{exact:true}">Register</a>
+            </li>
+        </ul>
+</nav>
+<div class="container" *ngIf="!nothing">
+    <div *ngFor="let result of data3">
+        <div style="cursor: pointer;" routerLink="/postdetails/{{result.slug}}" class="card card-body mb-2">
+            <h4>{{result.title}}</h4>
+            <small class="text-primary" [innerHTML]="result.desc"> </small>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div style="z-index: 9999; " class="modal fade" id="myModal" role="dialog">
+    <form (ngSubmit)="submit()" [formGroup]="form">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-danger" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="name">Post Title</label>
+                        <input type="text" formControlName="title" name="title" class="form-control"
+                            placeholder="Enter Title" [ngClass]="{'is-invalid': submitted && f.title.errors}">
+
+                        <div *ngIf="submitted && f.title.errors" style="text-align: center;color: red;">
+                            <div *ngIf="f.title.errors.required">
+                                Title is Requered
+                            </div>
+                        </div>
+
+                    </div><br>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select name="category" formControlName="category" id="category" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && f.category.errors}">
+                            <option value="">Select Category</option>
+                            <option value="cat 1">cat 1</option>
+                            <option value="cat 2">cat 2</option>
+                        </select>
+
+                        <div *ngIf="submitted && f.category.errors" style="text-align: center;color: red;">
+                            <div *ngIf="f.category.errors.required">
+                                Category is Requered
+                            </div>
+                        </div>
+
+                    </div><br>
+
+                    <div class="form-group">
+                        <label for="type">Type Post</label>
+                        <select formControlName="type" name="type" id="type" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && f.type.errors}" (change)="type($event)">
+                            <option value="">Select Type</option>
+                            <option value="Image">Image</option>
+                            <option value="Video">Video</option>
+                        </select>
+                        <div *ngIf="submitted && f.type.errors" style="text-align: center;color: red;">
+                            <div *ngIf="f.type.errors.required">
+                                Type is Requered
+                            </div>
+                        </div>
+                    </div><br>
+
+                    <div class="form-group image">
+                        <label for="file">Select Image</label>
+                        <input type="file" formControlName="file" name="file" id="file" class="form-control"
+                            placeholder="Enter Password" accept=".png, .jpg, .jpeg" (change)="uploadimage($event)"
+                            [ngClass]="{'is-invalid': submitted && f.file.errors}">
+
+                        <div *ngIf="submitted && f.file.errors" style="text-align: center;color: red;">
+                            <div *ngIf="f.file.errors.required">
+                                Image is Requered
+                            </div>
+                            <div *ngIf="f.file.errors.size">
+                                2.5M or >
+                            </div>
+                        </div>
+
+                    </div><br>
+                    <div class="form-group video">
+                        <label for="file">Enter Video ID</label>
+                        <input type="text" formControlName="file" name="file" id="file" class="form-control"
+                            placeholder="Enter Password" [ngClass]="{'is-invalid': submitted && f.file.errors}">
+
+                        <div *ngIf="submitted && f.file.errors" style="text-align: center;color: red;">
+                            <div *ngIf="f.file.errors.required">
+                                Youtube Video is Requered
+                            </div>
+                            <div *ngIf="f.file.errors.size">
+                                2.5M or >
+                            </div>
+                        </div>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'"
+                            formControlName="desc" name="desc" [ngClass]="{'is-invalid': submitted && f.desc.errors}">
+                        </angular-editor>
+                        <div *ngIf="submitted && f.desc.errors" style="text-align: center;color: red;">
+                            <div *ngIf="f.desc.errors.required">
+                                Description is Required
+                            </div>
+                        </div>
+                    </div><br>
+
+                    <button class="btn" type="submit">Add</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="animate__animated animate__slideInLeft sidbar-mobile" id="sidbar-mobile">
+    <app-sidbar style="top: 20px; position: relative;"></app-sidbar>
+</div>

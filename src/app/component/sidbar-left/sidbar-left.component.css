@@ -1,0 +1,10 @@
+.following{
+    display: none;
+}
+.h3{
+    display: flex;
+}
+.bi-arrow-clockwise{
+    margin-left: 20px;
+    cursor: pointer;
+}

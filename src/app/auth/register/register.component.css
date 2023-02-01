@@ -1,0 +1,24 @@
+body{
+    background: rgb(255, 255, 255);
+}
+.container{
+    top: 140px;
+    position: relative;
+}
+input{
+    height: 44px;
+}
+select:hover{
+    border: 2px solid #1876f2;
+    }
+input:hover{
+border: 2px solid #1876f2;
+}
+.card{
+    border: none;
+}
+.btn:hover{
+    font-size: large;
+}
+
+

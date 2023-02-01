@@ -1,0 +1,89 @@
+
+.navbar{
+    margin-left: 0 !important;
+    width: 100%;
+    position: fixed;
+    background: #0d7cf1!important;
+    z-index: 999;
+}
+.input-search {
+    color: beige !important;
+    border: none;
+    background:#0667cffb!important ;
+}
+.input-search::placeholder{
+    color: bisque;
+}
+.collapse{
+    margin-right: 25px !important;
+}
+.nav-item{
+    margin-right: 5px !important;
+}
+
+.icon-circle {
+    color: whitesmoke;
+    width: 70px;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.247);
+  }
+  .icon-circle:hover{
+    background: rgba(245, 245, 245, 0.719);
+  }
+  .icon-circle i {
+    position: absolute;
+    right: 30px;
+    top: 32px;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.966);
+    transform: translate(-50%, -50%);
+  }
+  .btnu{
+    color: whitesmoke;
+    width: 70px;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.247);
+  }
+  .video{
+    display: none;
+}
+
+
+@media  (max-width:990px) {
+    .collapse{
+        margin-left: 25px !important;
+    }
+    .icon-circle {
+        color: whitesmoke;
+        width: 100%;
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.247);
+      }
+      .btnu{
+        color: whitesmoke;
+        width: 100%;
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.247);
+      }
+}
+
+
+/* to make backgrougd shad */
+.modal-backdrop{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+   z-index: 0;
+}
